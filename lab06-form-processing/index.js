@@ -96,6 +96,31 @@ app.post('/bmi', function(req,res){
     })
 })
 
+app.get('/fruits',function(req,res){
+    res.render('fruits')
+})
+
+app.post('/fruits', function(req,res){
+    let fruitsMethods = req.body.items || [];
+    fruitsMethods = Array.isArray(fruitsMethods) ? fruitsMethods : [ fruitsMethods ];
+    let lst = [];
+    if (fruitsMethods.includes("apple")){
+        lst.push(3)
+    }
+    if (fruitsMethods.includes("durian") ){
+        lst.push(15)
+    }
+    if (fruitsMethods.includes("orange") ){
+        lst.push(6)
+    }
+    if (fruitsMethods.includes("banana") ){
+        lst.push(4)
+    }
+    let total = lst.reduce((a, b) => a + b);
+    res.render('display-fruits',{
+        'total':total
+    })
+})
 
 /* 3. Start server */
 app.listen(3000, function(){
